@@ -12,7 +12,7 @@ data class User(
 ) : Serializable
 
 data class RegistrationResponse(
-    val `data`: User,
+    val data: User? = null,
     val error: Boolean,
     val message: String
 )
