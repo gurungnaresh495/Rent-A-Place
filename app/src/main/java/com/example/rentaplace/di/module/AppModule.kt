@@ -5,6 +5,7 @@ import com.example.rentaplace.data.network.PropertyManagementApi
 import com.example.rentaplace.data.repo.AuthRepository
 import com.example.rentaplace.di.component.AppComponent
 import com.example.rentaplace.di.component.DaggerAppComponent
+import com.example.rentaplace.ui.auth.RegisterViewModel
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -27,6 +28,12 @@ class AppModule {
     fun getAuthRepo(): AuthRepository
     {
         return AuthRepository()
+    }
+
+    @Provides
+    fun getRegistrationObserver(viewModel: RegisterViewModel): RegisterViewModel.RegistrationObserver
+    {
+        return viewModel.RegistrationObserver()
     }
 
 }

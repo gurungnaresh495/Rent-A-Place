@@ -10,6 +10,8 @@ import com.example.rentaplace.data.model.User
 import com.example.rentaplace.data.network.PropertyManagementApi
 import com.example.rentaplace.di.component.DaggerAppComponent
 import com.example.rentaplace.di.module.AppModule
+import com.example.rentaplace.ui.auth.RegisterViewModel
+import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -17,6 +19,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class AuthRepository {
+    lateinit var registrationResponse: RegistrationResponse
     init {
         DaggerAppComponent.builder().appModule(AppModule()).build().inject(this)
     }
@@ -25,24 +28,9 @@ class AuthRepository {
     lateinit var propertyManagementApi: PropertyManagementApi
 
     @SuppressLint("CheckResult")
-    fun registerUser(user: User): MutableLiveData<RegistrationResponse> {
-        var registrationResponse = MutableLiveData<RegistrationResponse>()
-        propertyManagementApi.registerUser(user).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : SingleObserver<RegistrationResponse> {
-                    override fun onSubscribe(d: Disposable) {
+    fun registerUser(user: User): Single<RegistrationResponse> {
 
-                    }
-
-                    override fun onSuccess(t: RegistrationResponse) {
-                        registrationResponse.value = t
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.d("abc", e.message.toString())
-                    }
-
-                })
-        return registrationResponse
+        return propertyManagementApi.registerUser(user).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
 }
