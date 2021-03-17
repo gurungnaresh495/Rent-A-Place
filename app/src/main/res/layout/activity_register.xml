@@ -1,0 +1,70 @@
+<layout>
+
+    <data>
+        <variable
+            name="registerViewModel"
+            type="com.example.rentaplace.ui.auth.RegisterViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="Register"
+            android:textSize="32dp" />
+
+        <EditText
+            android:text="@={registerViewModel.email}"
+            android:id="@+id/register_edit_text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email" />
+
+        <EditText
+            android:text="@={registerViewModel.password}"
+            android:id="@+id/register_edit_text_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password" />
+
+        <EditText
+            android:text="@={registerViewModel.name}"
+            android:id="@+id/register_edit_text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full Name" />
+
+        <EditText
+            android:text="@={registerViewModel.type}"
+            android:id="@+id/register_edit_text_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:textColor="@color/red"
+            android:id="@+id/register_error_message"
+            android:visibility="gone"
+            android:textSize="16dp" />
+
+        <Button
+            android:onClick="@{registerViewModel::onRegisterButtonClicked}"
+            android:id="@+id/register_button_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register" />
+
+
+    </LinearLayout>
+</layout>
