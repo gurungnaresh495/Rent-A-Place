@@ -49,8 +49,6 @@ class LoginViewModel: ViewModel() {
         }
     }
 
-
-
     inner class LoginObserver(): SingleObserver<LoginResponse>
     {
         override fun onSubscribe(d: Disposable) {
