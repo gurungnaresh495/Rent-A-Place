@@ -30,10 +30,5 @@ class AppModule {
         return AuthRepository()
     }
 
-    @Provides
-    fun getRegistrationObserver(viewModel: RegisterViewModel): RegisterViewModel.RegistrationObserver
-    {
-        return viewModel.RegistrationObserver()
-    }
 
 }
