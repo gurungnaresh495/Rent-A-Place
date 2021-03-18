@@ -28,16 +28,16 @@ class AuthRepository {
         DaggerAppComponent.builder().appModule(AppModule()).build().inject(this)
     }
 
-    @Inject
-    lateinit var propertyManagementApi: PropertyManagementApi
-
-    fun registerUser(user: User): Single<RegistrationResponse> {
-
-        return propertyManagementApi.registerUser(user).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-    }
-
-    fun loginUser(user:LoginUser): Single<LoginResponse>
-    {
-        return propertyManagementApi.loginUser(user).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-    }
+//    @Inject
+//    lateinit var propertyManagementApi: PropertyManagementApi
+//
+//    fun registerUser(user: User): Single<RegistrationResponse> {
+//
+//        return propertyManagementApi.registerUser(user).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+//    }
+//
+//    fun loginUser(user:LoginUser): Single<LoginResponse>
+//    {
+//        return propertyManagementApi.loginUser(user).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+//    }
 }

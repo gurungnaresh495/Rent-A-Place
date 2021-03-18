@@ -3,12 +3,13 @@ package com.example.rentaplace.data.model
 import java.io.Serializable
 
 data class User(
-    val _id: String?,
-    val createdAt: String?,
+
     val email: String,
     val name: String?,
     val password: String,
-    val type: String
+    val type: String,
+    val _id: String? = null,
+    val createdAt: String? = null
 ) : Serializable
 
 data class RegistrationResponse(

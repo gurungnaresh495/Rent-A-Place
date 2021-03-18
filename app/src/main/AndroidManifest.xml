@@ -13,16 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RentAPlace">
         <activity android:name=".ui.home.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.auth.LoginActivity">
-
         </activity>
-        <activity android:name=".ui.auth.RegisterActivity" />
+        <activity android:name=".ui.auth.RegisterActivity" ><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".ui.home.MainActivity"></activity>
 
         <meta-data
