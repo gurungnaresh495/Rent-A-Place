@@ -12,8 +12,8 @@ import retrofit2.http.POST
 interface PropertyManagementApi {
 
     @POST("auth/register")
-    fun registerUser(@Body user:User): Single<RegistrationResponse>
+    suspend fun registerUser(@Body user:User): RegistrationResponse
 
     @POST("auth/login")
-    fun loginUser(@Body user: LoginUser): Single<LoginResponse>
+    suspend fun loginUser(@Body user: LoginUser): LoginResponse
 }

@@ -5,14 +5,20 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.rentaplace.data.model.LoginResponse
+import com.example.rentaplace.data.model.LoginUser
 import com.example.rentaplace.data.model.RegistrationResponse
 import com.example.rentaplace.data.model.User
+import com.example.rentaplace.data.network.PropertyManagementApi
 import com.example.rentaplace.data.repo.AuthRepository
 import com.example.rentaplace.di.component.DaggerAppComponent
 import com.example.rentaplace.di.module.AppModule
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -38,7 +44,12 @@ class RegisterViewModel: ViewModel() {
     var name: String? = null
 
     @Inject
-    lateinit var authRepo: AuthRepository
+    lateinit var propertyManagementApi: PropertyManagementApi
+
+    private val coroutineExceptionHanlder = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+        registrationStatus.value = RegisterAction.FAILURE
+    }
 
     fun onRegisterButtonClicked(view: View)
     {
@@ -48,8 +59,10 @@ class RegisterViewModel: ViewModel() {
         }
         else
         {
-           var response = authRepo.registerUser(User(null, null, email!!, name, password!!, type!!))
-            response.subscribeWith(RegistrationObserver())
+            viewModelScope.launch (Dispatchers.Main+ coroutineExceptionHanlder){
+                propertyManagementApi.registerUser(User( email!!, name, password!!, type!!))
+                registrationStatus.value = RegisterAction.SUCCESS
+            }
         }
     }
 

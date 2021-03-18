@@ -4,14 +4,19 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.rentaplace.data.model.LoginResponse
 import com.example.rentaplace.data.model.LoginUser
+import com.example.rentaplace.data.network.PropertyManagementApi
 import com.example.rentaplace.data.repo.AuthRepository
 import com.example.rentaplace.di.component.DaggerAppComponent
 import com.example.rentaplace.di.module.AppModule
 import com.example.rentaplace.helper.SessionManager
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LoginViewModel: ViewModel() {
@@ -28,7 +33,12 @@ class LoginViewModel: ViewModel() {
     }
 
     @Inject
-    lateinit var authRepo: AuthRepository
+    lateinit var propertyManagementApi: PropertyManagementApi
+
+    private val coroutineExceptionHanlder = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+        loginStatus.value = LoginAction.FAILURE
+    }
 
     enum class LoginAction(val message: String){
         SUCCESS("Login Succeeded"),
@@ -44,26 +54,12 @@ class LoginViewModel: ViewModel() {
         }
         else
         {
-            var response = authRepo.loginUser(LoginUser( email!!, password!!))
-            response.subscribeWith(LoginObserver())
+            viewModelScope.launch(Dispatchers.Main + coroutineExceptionHanlder) {
+                propertyManagementApi.loginUser(LoginUser(email!!, password!!))
+                loginStatus.value = LoginAction.SUCCESS
+            }
         }
     }
 
-    inner class LoginObserver(): SingleObserver<LoginResponse>
-    {
-        override fun onSubscribe(d: Disposable) {
 
-        }
-
-        override fun onSuccess(t: LoginResponse) {
-            loginStatus.value = LoginAction.SUCCESS
-            sessionManager.register(t.user._id!!, t.user.name!!, t.user.email,t.user.password)
-        }
-
-        override fun onError(e: Throwable) {
-            loginStatus.value = LoginAction.FAILURE
-            Log.d("abc", e.message.toString())
-        }
-
-    }
 }
