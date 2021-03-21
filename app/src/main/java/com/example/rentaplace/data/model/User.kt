@@ -4,12 +4,12 @@ import java.io.Serializable
 
 data class User(
 
-    val email: String,
-    val name: String?,
-    val password: String,
-    val type: String,
-    val _id: String? = null,
-    val createdAt: String? = null
+    var email: String? = null,
+    var name: String? = null,
+    var password: String? = null,
+    var type: String? = null,
+    var _id: String? = null,
+    var createdAt: String? = null
 ) : Serializable
 
 data class RegistrationResponse(
