@@ -1,11 +1,12 @@
 package com.example.rentaplace.di.module
 
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.example.rentaplace.MyApplication
 import com.example.rentaplace.app.Config
 import com.example.rentaplace.data.network.PropertyManagementApi
 import com.example.rentaplace.data.repo.AuthRepository
-import com.example.rentaplace.di.component.AppComponent
-import com.example.rentaplace.di.component.DaggerAppComponent
-import com.example.rentaplace.ui.auth.RegisterViewModel
+import com.example.rentaplace.helper.SessionManager
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -25,10 +26,20 @@ class AppModule {
     }
 
     @Provides
+    fun getSessionManager(): SessionManager
+    {
+        return SessionManager.getInstance()
+    }
+
+    @Provides
     fun getAuthRepo(): AuthRepository
     {
         return AuthRepository()
     }
 
-
+    @Provides
+    fun getGlideInstance(): RequestManager
+    {
+        return Glide.with(MyApplication.appContext)
+    }
 }

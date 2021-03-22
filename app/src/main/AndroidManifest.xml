@@ -12,16 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RentAPlace">
-        <activity android:name=".ui.home.SplashActivity">
-        </activity>
-        <activity android:name=".ui.auth.LoginActivity">
-        </activity>
-        <activity android:name=".ui.auth.RegisterActivity" ><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".ui.addProperty.AddPropertyActivity"></activity>
+        <activity android:name=".ui.landlordProperties.LandlordPropertyActivity" />
+        <activity android:name=".ui.landlordHome.LandlordHomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
-        <activity android:name=".ui.home.MainActivity"></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.home.SplashActivity" />
+        <activity android:name=".ui.auth.LoginActivity" />
+        <activity android:name=".ui.auth.RegisterActivity" />
+        <activity android:name=".ui.home.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

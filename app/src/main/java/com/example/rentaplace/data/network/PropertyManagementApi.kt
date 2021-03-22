@@ -1,13 +1,12 @@
 package com.example.rentaplace.data.network
 
-import com.example.rentaplace.data.model.LoginResponse
-import com.example.rentaplace.data.model.LoginUser
-import com.example.rentaplace.data.model.RegistrationResponse
-import com.example.rentaplace.data.model.User
+import com.example.rentaplace.data.model.*
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface PropertyManagementApi {
 
@@ -16,4 +15,7 @@ interface PropertyManagementApi {
 
     @POST("auth/login")
     suspend fun loginUser(@Body user: LoginUser): LoginResponse
+
+    @GET("property/user/{userId}")
+    suspend fun getUserProperties(@Path("userId") userId: String): UserPropertyResponse
 }
