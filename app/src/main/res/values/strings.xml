@@ -3,4 +3,18 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="register_page_redirect_text"> <u>Already user? Sign in</u>.</string>
+    <string name="add_property_property_address">Enter the rental property\'s address below.
+    The address is used to label each property, and to make it easier to log trips</string>
+    <string name="add_property_property_details">Next, we would like some basic information about the
+    property. If you input the Purchase price then we can calculate your property\'s Cash on Cash Invested
+    % correctly.</string>
+
+    <string name="add_property_exclude_from_dashboard">If excluded, this property won\'t be
+    included in the main dashboard\'s financial totals and charts</string>
+
+    <string name="add_property_mortgage_information">If your property has a mortgage terms enables
+    Housters to automatically set the principal, interest, and escrow amounts when you log mortgage
+    payment transactions. If your made extra principal payments, then logging them as mortgage
+    principal payments, then logging them as mortgage principal transactions will update the amortization
+    schedule</string>
 </resources>

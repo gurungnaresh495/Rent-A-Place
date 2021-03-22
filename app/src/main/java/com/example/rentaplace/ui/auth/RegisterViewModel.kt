@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rentaplace.data.model.RegisterError
+import com.example.rentaplace.data.model.RegistrationResponse
 import com.example.rentaplace.data.model.User
 import com.example.rentaplace.data.network.PropertyManagementApi
 import com.example.rentaplace.di.component.DaggerAppComponent
